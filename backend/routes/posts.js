@@ -1,0 +1,11 @@
+import express from "express";
+import { getFeedPosts, getUserPosts, createPost, updatePost, deletePost, likePost } from "../controllers/posts.js";
+import { verifyToken } from "../middleware/auth.js";
+const router = express.Router();
+router.get("/feed", verifyToken, getFeedPosts);
+router.get("/user/:userId", verifyToken, getUserPosts);
+router.post("/", verifyToken, createPost);
+router.put("/:postId", verifyToken, updatePost);
+router.delete("/:postId", verifyToken, deletePost);
+router.put("/:postId/like", verifyToken, likePost);
+export default router;
